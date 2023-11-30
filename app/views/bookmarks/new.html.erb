@@ -1,0 +1,7 @@
+<%= simple_form_for([@list, @bookmark], url: list_bookmarks_path(@list)) do |form| %>
+  <%= form.input :movie_id, collection: Movie.all, label: "Choose a Movie", label_method: :title, value_method: :id, include_blank: false %>
+
+  <%= form.input :comment %>
+
+  <%= form.button :submit, "Add Bookmark" %>
+<% end %>

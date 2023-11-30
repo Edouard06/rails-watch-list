@@ -1,0 +1,10 @@
+<h1>Bookmark Details</h1>
+
+<p><strong>Movie:</strong> <%= @bookmark.movie.title %></p>
+<p><strong>Comment:</strong> <%= @bookmark.comment %></p>
+
+<%= link_to 'Back', list_bookmarks_path(@list) %>
+<%= link_to "Delete",
+    list_bookmark_path_path(review),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>

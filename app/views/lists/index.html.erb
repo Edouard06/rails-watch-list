@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h1 style="text-align: center; font-family: Roboto, sans-serif; font-size: 36px; color: #333;">Listes des Catégories</h1>
+  <% @lists.each_with_index do |list, index| %>
+    <div class="card my-2" style="height: 300px; position: relative;">
+      <% # Associer une image différente à chaque élément de la liste %>
+      <% image_urls = ['téléchargement (4).jpg', 'téléchargement (5).jpg'] %>
+
+      <div class="card-category" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= asset_path(image_urls[index % image_urls.length]) %>'); height: 100%; background-size: cover; display: flex; align-items: center; justify-content: center; color: white;">
+        <%= link_to list.name, list_path(list), class: "card-title", style: "text-align: center; text-decoration: none; color: rgba(255, 255, 255, 0.8); font-weight: lighter;" %>
+      </div>
+      <div class="card-body" style="position: absolute; bottom: 10px; right: 10px;">
+        <%= link_to list_path(list), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

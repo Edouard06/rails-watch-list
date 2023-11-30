@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <h1 class="mb-4">New List</h1>
+
+  <%= form_with(model: @list, url: lists_path, local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :details, class: "form-label" %>
+      <%= form.text_field :details, class: "form-control" %>
+    </div>
+
+    <%= form.submit 'Create List', class: "btn btn-primary me-2" %>
+    <%= link_to 'Back', lists_path, class: "btn btn-secondary" %>
+  <% end %>
+</div>

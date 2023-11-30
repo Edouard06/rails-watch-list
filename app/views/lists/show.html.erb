@@ -1,0 +1,84 @@
+<div class="card" style="width: 16rem;">
+
+  <img src="<%= @list.bookmarks.first.movie.poster_url %>" class="card-img-top" alt="Movie Poster" style="width: 100%; height: auto;">
+
+
+  <div class="card-body">
+
+    <h5 class="card-title"><%= @list.name %></h5>
+
+
+    <% @list.bookmarks.each_with_index do |bookmark, index| %>
+
+      <p><%= bookmark.movie.title %></p>
+
+
+      <div class="d-flex justify-content-between align-items-center">
+        <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+      </div>
+
+
+      <% if index == @list.bookmarks.length - 1 %>
+        <div class="d-flex justify-content-between align-items-center">
+
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+    <div class="col-md-6">
+      <div style="display: flex; flex-direction: column-reverse;">
+        <div class="review_user">
+          <% @list.reviews.each do |review| %>
+            <div class="mb-3">
+              <p><strong>Note :</strong> <%= review.rating %></p>
+              <p><strong>Avis :</strong> <%= review.comment %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mt-4">
+          <%= link_to "Back list", lists_path, class: "btn btn-primary" %>
+          <%= link_to "Add bookmark", new_list_bookmark_path(@list), class: "btn btn-success ml-2" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+    </div>
+
+    <div class="col-md-6">
+      <div class="card fixed-bottom mb-4 ml-4">
+        <div class="card-body">
+          <%= form_with(model: [@list, @list.reviews.build], url: list_reviews_path(@list)) do |form| %>
+            <div class="mb-3">
+              <%= form.label :rating, "Note :", class: "form-label" %>
+              <%= form.number_field :rating, in: 1..5, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :comment, "Votre avis :", class: "form-label" %>
+              <%= form.text_area :comment, class: "form-control" %>
+            </div>
+
+            <%= form.submit "Ajouter un avis", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>

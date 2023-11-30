@@ -1,0 +1,15 @@
+<h1>New Review</h1>
+
+<%= form_with(model: [@list, @list.reviews.build], url: list_reviews_path(@list)) do |form| %>
+  <div class="mb-3">
+    <%= form.label :rating, "Note :", class: "form-label" %>
+    <%= form.number_field :rating, in: 1..5, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :comment, "Votre avis :", class: "form-label" %>
+    <%= form.text_area :comment, class: "form-control" %>
+  </div>
+
+  <%= form.submit "Ajouter un avis", class: "btn btn-primary" %>
+<% end %>
