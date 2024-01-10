@@ -1,0 +1,38 @@
+<!-- app/views/lists/new.html.erb -->
+
+<h1>New List</h1>
+
+<%= form_with(model: @list, local: true) do |form| %>
+  <% if @list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
+
+      <ul>
+        <% @list.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+<div class="movie_show">
+  <h2>Add a movie to this list:</h2>
+  <%= form_with(url: lists_path, method: :post) do |form| %>
+    <%= form.select :movie_ids,
+                    Movie.all.collect { |m| [m.title, m.id] },
+                    { prompt: "Choose a movie" },
+                    { multiple: true, size: 5 } %>
+    <%= form.submit "Add Movie" %>
+  <% end %>
+</div>
+
+  <div class="actions">
+    <%= form.submit "Create List" %>
+  </div>
+<% end %>
+
+<%= link_to "Back to Lists", lists_path %>
