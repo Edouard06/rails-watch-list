@@ -3,4 +3,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
 import "@popperjs/core"
-import * as bootstrap from "bootstrap"
+// import * as bootstrap from "bootstrap"
+import Rails from '@rails/ujs'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'

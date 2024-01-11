@@ -4,14 +4,22 @@ def index
   @bookmarks = Bookmark.all
 end
 
-  def new
+def show
+  @bookmark = Bookmark.find(params[:id])
+end
+
+def new
+  @list = List.find(params[:list_id])
   @bookmark = Bookmark.new
 end
 
 def create
   @bookmark = Bookmark.new(bookmark_params)
-  @bookmark.save
-  redirect_to bookmark_path(@bookmark)
+ if  @bookmark.save
+  redirect_to root_path(@bookmark)
+ else
+  render :new
+ end
 end
 
 def destroy
