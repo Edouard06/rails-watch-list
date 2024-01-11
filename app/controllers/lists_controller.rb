@@ -9,6 +9,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
+    Rails.logger.debug @list.movies.inspect
   end
 
   def create
@@ -27,7 +28,7 @@ class ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
 
-    if @list.save
+    if @list.update(list_params)
       redirect_to lists_path, notice: "List was successfully updated"
     else
       render :edit

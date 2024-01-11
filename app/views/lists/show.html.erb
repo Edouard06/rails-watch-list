@@ -1,11 +1,16 @@
-<!-- app/views/lists/show.html.erb -->
+<h1><%= @list.name %></h1>
 
-<h1>List Details</h1>
+<h5>Films dans cette liste :</h2>
 
-<p><strong>Name:</strong> <%= @list.name %></p>
+<ul>
+  <% @list.movies.each do |movie| %>
+  <%= render movie %>
+  <% all_bookmarks = Bookmark.where(list_id: @list.id) %>
+  <% bookmark = all_bookmarks.find{|bookmark| bookmark.movie_id == movie.id} %>
+  <%= bookmark.id %>
+  <%= link_to "Delete", delete_bookmark_path(bookmark.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" %>
+  <% end %>
+</ul>
 
-<%= link_to "Edit", edit_list_path(@list) %> |
-<%= link_to "Back to Lists", lists_path %> |
-<%= form_with(model: @list, method: :delete) do |form| %>
-  <%= form.submit "Delete", data: { confirm: "Are you sure?" } %>
-<% end %>
+<%= link_to "Return to all lists", root_path  %>
+<%= link_to "Add a bookmark", new_list_bookmark_path(params[:id])  %>

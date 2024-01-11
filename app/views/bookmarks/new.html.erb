@@ -1,0 +1,5 @@
+<%= simple_form_for [@movie, @list, @bookmark], url: new_list_bookmark_path(@list) do |f| %>
+  <%= f.association :movie %>
+  <%= f.association :list %>
+  <%= f.button :submit, "Create Bookmark" %>
+<% end %>
